@@ -1,0 +1,11 @@
+H:\VS2013\005\File backup\FileBackUp\FileBackUp\bin\Debug\FileBackUp.exe.config
+H:\VS2013\005\File backup\FileBackUp\FileBackUp\obj\Debug\FileBackUp.MainForm.resources
+H:\VS2013\005\File backup\FileBackUp\FileBackUp\obj\Debug\FileBackUp.Properties.Resources.resources
+H:\VS2013\005\File backup\FileBackUp\FileBackUp\obj\Debug\FileBackUp.csproj.GenerateResource.Cache
+H:\VS2013\005\File backup\FileBackUp\FileBackUp\bin\Debug\FileBackUp.exe
+H:\VS2013\005\File backup\FileBackUp\FileBackUp\bin\Debug\FileBackUp.pdb
+H:\VS2013\005\File backup\FileBackUp\FileBackUp\obj\Debug\FileBackUp.exe
+H:\VS2013\005\File backup\FileBackUp\FileBackUp\obj\Debug\FileBackUp.pdb
+H:\VS2013\005\File backup\FileBackUp\bin\Debug\FileBackUp.exe.config
+H:\VS2013\005\File backup\FileBackUp\obj\Debug\FileBackUp.exe
+H:\VS2013\005\File backup\FileBackUp\obj\Debug\FileBackUp.pdb
