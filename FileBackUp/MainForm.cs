@@ -25,7 +25,8 @@ namespace FileBackUp
         private void btnLoadList_Click(object sender, EventArgs e)
         {
             listFolders.Items.Clear();
-
+            groupFolders.Clear();
+                
             // зареждане на папките от избраната група
             var appSettings = ConfigurationManager.AppSettings;
             string selectedItem = (string)listBoxProfiles.SelectedItem;
@@ -35,7 +36,6 @@ namespace FileBackUp
             if (list != "" && list != null)
             {
                 folderList = list;
-                groupFolders.Clear();
                 groupFolders = list.Split(';').ToList();
 
                 for (int i = 0; i < groupFolders.Count(); i++)
@@ -194,6 +194,7 @@ namespace FileBackUp
                         resultSubfolders.FilesCount += folder.FilesCount;
                         resultSubfolders.FilesUpdated += folder.FilesUpdated;
                         resultSubfolders.FilesMissing += folder.FilesMissing;
+                        resultSubfolders.FilesChanged += folder.FilesChanged;
                     }
                 }
 
