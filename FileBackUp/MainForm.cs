@@ -26,7 +26,7 @@ namespace FileBackUp
         {
             listFolders.Items.Clear();
             groupFolders.Clear();
-                
+
             // зареждане на папките от избраната група
             var appSettings = ConfigurationManager.AppSettings;
             string selectedItem = (string)listBoxProfiles.SelectedItem;
@@ -134,6 +134,7 @@ namespace FileBackUp
             if (lblBaclUpFolder.Text != "")
             {
                 Cursor.Current = Cursors.WaitCursor;
+                long totalSize = 0;
 
                 listProgress.Items.Clear();
                 for (int i = 0; i < groupFolders.Count; i++)
@@ -143,8 +144,37 @@ namespace FileBackUp
 
                     listProgress.Items.Add(new ListViewItem(new[] { currentPath, folderStat.FilesCount.ToString(), folderStat.FilesMissing.ToString(), folderStat.FilesChanged.ToString(), "---" }));
                     listProgress.Refresh();
+
+                    totalSize += folderStat.Size;
+                    lblTotalChanges.Text = (long)totalSize / 1024 / 1024 / 1024 + " GB for update";
+                    lblTotalChanges.Refresh();
                 }
 
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (lblBaclUpFolder.Text != "")
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                long totalSize = 0;
+
+                for (int i = 0; i < groupFolders.Count; i++)
+                {
+                    var currentPath = groupFolders[i];
+                    var folderStat = GetAllFilesStat(currentPath, 0, true);
+
+                    listProgress.Items[i].SubItems[4].Text = folderStat.FilesUpdated.ToString();
+                    listProgress.Refresh();
+
+                    totalSize += folderStat.Size;
+                    lblTotalUpdated.Text = (long)totalSize / 1024 / 1024 / 1024 + " GB updated";
+                    lblTotalUpdated.Refresh();
+                }
+
+                lblFileCopied.Text = "";
                 Cursor.Current = Cursors.Default;
             }
         }
@@ -195,6 +225,7 @@ namespace FileBackUp
                         resultSubfolders.FilesUpdated += folder.FilesUpdated;
                         resultSubfolders.FilesMissing += folder.FilesMissing;
                         resultSubfolders.FilesChanged += folder.FilesChanged;
+                        resultSubfolders.Size += folder.Size;
                     }
                 }
 
@@ -214,6 +245,7 @@ namespace FileBackUp
                             resultSubfolders.FilesUpdated++;
                         }
                         resultSubfolders.FilesMissing++;
+                        resultSubfolders.Size += item.Length;
                     }
                     else
                     {
@@ -227,6 +259,7 @@ namespace FileBackUp
                                 resultSubfolders.FilesUpdated++;
                             }
                             resultSubfolders.FilesChanged++;
+                            resultSubfolders.Size += item.Length;
                         }
                     }
                 }
@@ -237,16 +270,18 @@ namespace FileBackUp
                 // some error reading directory
             }
 
+            result.FilesMissing = resultSubfolders.FilesMissing;
+            result.FilesChanged = resultSubfolders.FilesChanged;
+            result.FilesUpdated = resultSubfolders.FilesUpdated;
+            result.FilesCount = resultSubfolders.FilesCount + directory.GetFiles().Length + 1;
+            result.Size = resultSubfolders.Size;
+
             if (update)
             {
                 lblFreeSpace.Text = GetTotalFreeSpace(lblBaclUpFolder.Text.Substring(0, 3)).ToString() + " GB free";
                 lblFreeSpace.Refresh();
             }
 
-            result.FilesMissing = resultSubfolders.FilesMissing;
-            result.FilesChanged = resultSubfolders.FilesChanged;
-            result.FilesUpdated = resultSubfolders.FilesUpdated;
-            result.FilesCount = resultSubfolders.FilesCount + directory.GetFiles().Length + 1;
             return result;
         }
 
@@ -261,33 +296,13 @@ namespace FileBackUp
                 lblFreeSpace.Text = GetTotalFreeSpace(lblBaclUpFolder.Text.Substring(0, 3)).ToString() + " GB free";
             }
         }
-
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            if (lblBaclUpFolder.Text != "")
-            {
-                Cursor.Current = Cursors.WaitCursor;
-
-                for (int i = 0; i < groupFolders.Count; i++)
-                {
-                    var currentPath = groupFolders[i];
-                    var folderStat = GetAllFilesStat(currentPath, 0, true);
-
-                    listProgress.Items[i].SubItems[4].Text = folderStat.FilesUpdated.ToString();
-                    listProgress.Refresh();
-                }
-
-                lblFileCopied.Text = "";
-                Cursor.Current = Cursors.Default;
-            }
-        }
         public long GetTotalFreeSpace(string driveName)
         {
             foreach (DriveInfo drive in DriveInfo.GetDrives())
             {
                 if (drive.IsReady && drive.Name == driveName)
                 {
-                    return drive.TotalFreeSpace/1024/1024/1024;
+                    return drive.TotalFreeSpace / 1024 / 1024 / 1024;
                 }
             }
             return -1;

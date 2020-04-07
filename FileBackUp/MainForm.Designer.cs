@@ -49,6 +49,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblFileCopied = new System.Windows.Forms.Label();
             this.lblFreeSpace = new System.Windows.Forms.Label();
+            this.lblTotalChanges = new System.Windows.Forms.Label();
+            this.lblTotalUpdated = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -99,7 +101,7 @@
             this.Changed,
             this.Updated});
             this.listProgress.GridLines = true;
-            this.listProgress.Location = new System.Drawing.Point(12, 200);
+            this.listProgress.Location = new System.Drawing.Point(13, 235);
             this.listProgress.Name = "listProgress";
             this.listProgress.Size = new System.Drawing.Size(670, 153);
             this.listProgress.TabIndex = 18;
@@ -205,7 +207,7 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(119, 171);
+            this.btnUpdate.Location = new System.Drawing.Point(13, 200);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(96, 23);
             this.btnUpdate.TabIndex = 26;
@@ -216,7 +218,7 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.lblFileCopied);
-            this.panel1.Location = new System.Drawing.Point(12, 360);
+            this.panel1.Location = new System.Drawing.Point(13, 395);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(670, 36);
             this.panel1.TabIndex = 27;
@@ -235,14 +237,36 @@
             this.lblFreeSpace.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(100)))));
             this.lblFreeSpace.Location = new System.Drawing.Point(346, 146);
             this.lblFreeSpace.Name = "lblFreeSpace";
-            this.lblFreeSpace.Size = new System.Drawing.Size(143, 20);
+            this.lblFreeSpace.Size = new System.Drawing.Size(187, 20);
             this.lblFreeSpace.TabIndex = 28;
+            // 
+            // lblTotalChanges
+            // 
+            this.lblTotalChanges.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.lblTotalChanges.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblTotalChanges.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(100)))));
+            this.lblTotalChanges.Location = new System.Drawing.Point(346, 171);
+            this.lblTotalChanges.Name = "lblTotalChanges";
+            this.lblTotalChanges.Size = new System.Drawing.Size(187, 20);
+            this.lblTotalChanges.TabIndex = 29;
+            // 
+            // lblTotalUpdated
+            // 
+            this.lblTotalUpdated.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.lblTotalUpdated.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblTotalUpdated.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(100)))));
+            this.lblTotalUpdated.Location = new System.Drawing.Point(346, 200);
+            this.lblTotalUpdated.Name = "lblTotalUpdated";
+            this.lblTotalUpdated.Size = new System.Drawing.Size(187, 20);
+            this.lblTotalUpdated.TabIndex = 30;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(694, 408);
+            this.ClientSize = new System.Drawing.Size(694, 439);
+            this.Controls.Add(this.lblTotalUpdated);
+            this.Controls.Add(this.lblTotalChanges);
             this.Controls.Add(this.lblFreeSpace);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnUpdate);
@@ -290,6 +314,8 @@
         private System.Windows.Forms.Label lblFileCopied;
         private System.Windows.Forms.ColumnHeader Changed;
         private System.Windows.Forms.Label lblFreeSpace;
+        private System.Windows.Forms.Label lblTotalChanges;
+        private System.Windows.Forms.Label lblTotalUpdated;
     }
 }
 

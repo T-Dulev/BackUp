@@ -15,6 +15,7 @@ namespace FileBackUp
         public long FilesMissing { get; set; }
         public long FilesChanged { get; set; }
         public long FilesUpdated { get; set; }
+        public long Size { get; set; }
     }
     class Class1
     {
