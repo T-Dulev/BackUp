@@ -218,7 +218,7 @@ namespace FileBackUp
                 var folders = directory.GetDirectories().ToList();
                 foreach (var item in folders)
                 {
-                    if (item.Name != "System Volume Information")
+                    if (item.Name != "System Volume Information" && item.Name != "$RECYCLE.BIN")
                     {
                         var folder = GetAllFilesStat(item.FullName, level + 1, update);
                         resultSubfolders.FilesCount += folder.FilesCount;
